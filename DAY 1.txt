@@ -1,3 +1,4 @@
+DATE : 23-DEC-2019
 SIMPLE SELECT 
 
 v1 q1  select * from customers;
