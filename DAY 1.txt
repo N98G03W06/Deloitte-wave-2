@@ -1,0 +1,77 @@
+SIMPLE SELECT 
+
+v1 q1  select * from customers;
+v1 q2  False
+v1 q3  select pack_id,speed,monthly_payment from packages;
+v1 q4  true
+v1 q5  false
+v1 q6  select customer_id,first_name,last_name,main_phone_num,secondary_phone_num,pack_id from customers;
+v1 q7  select first_name, last_name,join_date,monthly_discount,1.2*monthly_discount as A,0.8*monthly_discount as B from customers;
+v1 q8  select pack_id,speed,strt_date,monthly_payment,monthly_payment*12 as yearly_payment from packages;
+v1 q9  select last_name||' '||first_name as full_name, main_phone_num||', '||secondary_phone_num as contact_details from customers; 
+v1 q10 select distinct city from customers;
+v1 q11 select distinct state from customers;
+v1 q12 select distinct city,state from customers;
+v1 q13 select last_name||' '||state as customer_and_state from customers;
+v1 q14 select first_name as FN, last_name as LN, monthly_discount as DC, city||' '||street as full_address from customers;
+v1 q15 select distinct monthly_discount from customers;
+v1 q16 select distinct pack_id from packages;
+
+WHERE SELECT
+
+
+v1 q1  select first_name,last_name,pack_id from customers where last_name = 'king';
+v1 q2  select * from packages where speed = '5Mbps';
+v1 q3  select first_name, last_name,pack_id,monthly_discount from customers where monthly discount < 30;
+v1 q4  select * from customers where join_date < '01-JAN-07';
+v1 q5  select customer_id, first_name, state,city, pack_id from customers where pack_id in (14,21,21,7);
+v1 q6  select customer_id, first_name, state,city, pack_id from customers where pack_id NOT in (3,10,27);
+v1 q7  select last_name,main_phone_num,monthly_discount,pack_id from customers where customer_id in (703,314,560); 
+v1 q8  select first_name, monthly_discount from customers where first_name like '%e';
+v1 q9  select last_name, pack_id from customers where last_name like '_d%'; 
+v1 q10 select * from customers where Regexp_like (last_name,'+[ljh]+') order by monthly_discount DESC;
+v1 q11 select last_name,join_date,monthly_discount,pack_id from customers where last_name Not like '%a%';
+v2 q12 select * from customer where pack_id is Null;
+v1 q13 select first_name||' '||last_name as full_name, monthly_discount from customers where monthly_discount NOT between 20 and 30 order by full_name asc;
+v1 q14 select first_name||' '||last_name as full_name,main_phone_num||' '||street as Contacts, monthly_discount as DC from customers where monthly_discount between 11 and 27;
+
+v1 q15 select customer_id
+	from customers
+	where state= 'Newyork' AND monthly_discount between 30 and 40 or pack_id not in (8,19,30) AND join_date < '01-JAN-2007';
+
+v1 q16 select last_name,pack_id,birth_date
+	from customers
+	where join_date between '12-Dec-2007' AND '17-apr-2010';
+
+v1 q17 select pack_id,strt_date,speed
+	from packages
+	where strt_date < '01-jan-2007';
+v1 q18 select pack_id, speed, sector_id
+	from packages
+	where sector_id=1;
+
+v1 q19 select pack_id,speed,sector_id 
+	from packages 
+	where speed = '5Mbps' or speed = '10Mbps';
+
+v1 q20 select last_name,monthly_discount 
+	from customers
+	where city = 'orlando';
+
+v1 q21  (using or)
+	select last_name,pack_id 
+	from customers
+	where pack_id = 9 or pack_id = 18;
+
+	(using in)
+	select last_name,pack_id 
+	from customers
+	where pack_id in (9,18);
+
+v1 q22 select first_name,main_phone_num,secondary_phone_num
+	from customers 
+	where secondary_phone_num is null;
+
+v1 q23 select first_name, monthly_discount,pack_id
+	from customers
+	where monthly_discount is null;
