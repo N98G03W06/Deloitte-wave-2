@@ -1,0 +1,130 @@
+V2 SCALAR FUNCTIONS:
+
+q1 	select lower(first_name),upper(last_name) 
+	from tblemployees 
+
+	where Employee_id between 80 and 150;
+q2 	select first_name,last_name 
+	from tblemployees 
+	where lower(last_name) = 'king';
+
+q3 a)	select first_name,last_name,substr(lower(first_name),1,1)||substr(lower(last_name),1,3)||'@oracle.com' 
+	from tblemployees;
+   b) 	select first_name,last_name,substr(lower(first_name),1,1)||substr(lower(last_name),-3)||'@oracle.com' 
+	from tblemployees;
+
+q4 a) 	select first_name||last_name
+	from tblemployees;
+   b) 	select first_name||last_name||hire_date
+	from tblemployees;
+
+q5 	select last_name
+	from tblemployees
+    	where length(last_name)>8;   
+
+q6 a)  	select first_name,last_name,phone_number,replace(phone_number,515,815) as new_phone_num
+	from tblemployees;
+   b) 	select first_name,last_name,phone_number,replace(SUBSTR(phone_number,1,3),515,815)||substr(phone_number,4) as new_phone_num
+	from tblemployees;   
+
+q7 	select first_name,salary,salary*1.12,Round(salary*1.12),Floor(salary*1.12) 
+	from tblemployees; 
+
+q8  	select first_name,hire_date,hire_date-10,Add_months(hire_date,1),sysdate-hire_date+1 as DateDiff
+	from tblemployees; 	
+
+q9 	select first_name,last_name,hire_date,TRUNC(MONTHS_BETWEEN(SYSDATE,hire_date)) ,TRUNC(MONTHS_BETWEEN(SYSDATE,hire_date)/12)  
+	from tblemployees; 
+
+q10 	select first_name,hire_date,add_months(hire_date,12)  
+	from tblemployees; 
+
+q11	select first_name,hire_date,Round(hire_date,'year'),Round(hire_date,'month')
+	from tblemployees;
+
+q12 	select first_name,hire_date,to_char(hire_date,'day'),to_char(hire_date,'yyyy')
+	from tblemployees; 
+ 
+q13	select upper(last_name),to_char(salary,'99,999.999'),to_char(hire_date,'dd/mm/yyyy')
+	from tblemployees
+	WHERE lower(last_name) like 'd%' 
+	or lower(last_name) like 'k%';
+
+q14 1) 	select first_name,last_name,salary,NVL(commission_pct,0)
+	from tblemployees;
+    2)  select first_name,last_name,salary,Replace(nvl(commission_pct,0),0,'NO COMMISION')
+	from tblemployees;
+
+q15 	select first_name,last_name,salary,
+	case 
+	when salary between 0 and 5000 then 'A'
+	when salary between 5001 and 15000 then 'B'
+	when salary between 15001 and 20000 then 'C'
+	else 'D'
+	end as salary_grade
+	from tblemployees;
+
+
+	
+V2 GROUP FUNCTIONS V2
+
+q1 	select min(last_name) from tblemployees;
+q2 	select max(last_name) from tblemployees;
+q3	select count(*) from tblemployees;
+q4	select count(commission_pct) from tblemployees where commission_pct is not null;
+q5 	select count(*) from tblemployees where commission_pct is null;
+q6 	select max(salary),min(salary),avg(salary) from tblemployees;
+
+q7 a)	select department_id,avg(salary) 
+	from tblemployees
+	group by department_id;
+
+   b)	select department_id,avg(salary) 
+	from tblemployees
+	group by department_id
+	having department_id in (50,80);
+
+q8 a) 	select job_id,count(employee_id)
+	from tblemployees
+	group by job_id;	
+   b) 	select job_id,count(employee_id)
+	from tblemployees
+	where salary >10000
+	group by job_id;
+   C) 	select job_id,count(employee_id)
+	from tblemployees
+	where salary >10000
+	group by job_id
+	HAVING count(employee_id)>2;
+
+Q9 	select department_id,job_id,AVG(salary)
+	from tblemployees
+	group by department_id,job_id;
+
+q10 a) 	select manager_id,MAX(salary)
+	from tblemployees
+	group by manager_id;
+
+    b)	select manager_id,MAX(salary)
+      	from tblemployees
+	group by manager_id
+	having max(salary)>10000;
+
+q11 	select job_id,Min(salary)
+	from tblemployees
+	group by job_id
+	having min(salary)>7000;
+
+q12 	select department_id,avg(salary)
+	from tblemployees
+	group by department_id
+	having avg(salary)>9000 
+	and department_id in (20,80);
+
+
+
+
+
+
+	
+

@@ -1,0 +1,161 @@
+SQL JOIN QUERIES V1
+
+
+q1 a)	select C.first_name, C.last_name,P.pack_id,P.speed 
+	FROM customers C 
+	JOIN Packages P
+	ON c.pack_id=p.pack_id;
+
+   b)	select C.first_name, C.last_name,P.pack_id,P.speed 
+	FROM customers C 
+	JOIN Packages P
+	ON c.pack_id=p.pack_id 
+	Where c.pack_id in (22,27)
+	order by c.last_name ASC;
+
+q2 a) 	select P.pack_id,P.speed,P.monthly_payment,S.sector_id
+	FROM packages P
+	join sectors S 
+	on P.sector_id=S.Sector_id;
+   
+   b) 	select C.First_name||' '||C.last_name as Customer_Name,C.pack_id,P.speed,P.monthly_payment,p.sector_id
+	FROM Customers C
+	join packages P
+	on   c.pack_id=p.pack_id
+	join sectors S
+	on P.sector_id=S.Sector_id;
+
+   C) 	select C.First_name||' '||C.last_name as Customer_Name,C.pack_id,P.speed,P.monthly_payment,p.sector_id
+	FROM Customers C
+	join packages P
+	on   c.pack_id=p.pack_id
+	join sectors S
+	on P.sector_id=S.Sector_id
+	WHERE lower(s.sector_name)='business';
+
+q3 	select C.last_name,C.First_name,c.join_date,C.pack_id,P.speed,s.sector_name
+	FROM Customers C
+	join packages P
+	on   c.pack_id=p.pack_id
+	join sectors S
+	on P.sector_id=S.Sector_id
+	WHERE lower(s.sector_name)='private' 
+	AND Extract(year from C.join_date)= 2006;
+
+q4 	select P.pack_id,P.speed,P.monthly_payment,PG.Grade_id,PG.Grade_name
+	from packages P
+	JOIN pack_grades PG
+	on p.monthly_payment between PG.min_price and PG.max_price;
+
+q5 a) 	select C.first_name,C.last_name,P.speed,P.monthly_payment
+	from Customers C
+	INNER JOIN Packages P
+	on C.pack_id=P.pack_id;
+
+   b) 	select C.first_name,C.last_name,P.speed,P.monthly_payment,p.pack_id
+	from Customers C
+	LEFT OUTER JOIN Packages P
+	on C.pack_id=P.pack_id;
+
+	
+   c) 	select C.first_name,C.last_name,P.speed,P.monthly_payment,p.pack_id
+	from Customers C
+	RIGHT OUTER JOIN Packages P
+	on C.pack_id=P.pack_id;
+
+   d) 	select C.first_name,C.last_name,P.speed,P.monthly_payment,p.pack_id
+	from Customers C
+	FULL OUTER JOIN Packages P
+	on C.pack_id=P.pack_id;
+
+q6  	select C.first_name,C.last_name,C.pack_id
+	FROM customers C
+    	Join customers c1
+	on C.pack_id=C1.pack_id 
+    	and lower(C1.first_name)='amado' 
+    	and lower(C1.last_name)='taylor';
+
+q7  	select C.first_name,C.last_name,c.monthly_discount
+	FROM customers C
+	inner Join Customers C1
+	on c.monthly_discount<C1.monthly_discount 
+    	and c1.customer_id=103;
+
+q8 	select P.pack_id,p.speed
+	from Packages P
+	join Packages P1
+	on P.speed=P1.speed and P1.Pack_id=10;
+
+
+
+
+SQL NESTED QUERIES v1 
+
+q1	select C.first_name,C.last_name,C.city,C.state
+	FROM Customers C
+	where state=(select state from customers where customer_id = 170);
+
+
+q2 	select P.pack_id,P.speed,P.sector_id
+	From Packages P
+	where p.sector_id = (select sector_id from packages where pack_id= 10);
+	
+
+q3 	select C.first_name,C.last_name,C.join_date
+	From customers C
+	where join_date> 
+	(select join_date from customers where customer_id = 540);
+
+q4 	select first_name,last_name,join_date 
+	from customers 
+	where to_char(join_date,'mon-yyyy') LIKE (select to_char(join_date,'mon-yyyy') from customers where customer_id=372);
+
+q5 	select first_name,last_name,city,state,pack_id
+	from customers 
+	where pack_id in (select pack_id from packages where Upper(speed)='5MBPS');
+
+q6 	select pack_id,speed,strt_date
+	from packages 
+	where to_char(strt_date,'yyyy') = (select to_char(strt_date,'yyyy') from packages where pack_id=7);
+
+q7	select C.first_name,C.monthly_discount,P.pack_id,C.main_phone_num,C.secondary_phone_num
+	from customers C
+	join packages P
+	on c.pack_id=P.pack_id
+	where sector_id IN (select sector_id from sectors where lower(sector_name) ='business') ;
+
+q8 	select C.first_name,C.monthly_discount,P.pack_id 
+	from customers C
+	join packages P
+	on C.pack_id= P.pack_id 
+	where p.monthly_payment > (select avg(monthly_payment) from packages);
+
+
+q9 	select first_name,city,state,birth_date,monthly_discount
+	from customers 
+	where birth_date = (select birth_date from customers where customer_id=179)
+	and monthly_discount> (select monthly_discount from customers where customer_id =107);
+
+
+q10 	select *
+	from Packages
+	where speed = (select speed from packages where pack_id=30)
+	and monthly_payment > (select monthly_payment from packages where pack_id=7);
+
+q11 	select pack_id,speed,monthly_payment
+	from Packages
+	where monthly_payment > (select max(monthly_payment) from packages where lower(speed) = '5mbps');
+
+q12 	select pack_id,speed,monthly_payment
+	from Packages
+	where monthly_payment > (select min(monthly_payment) from packages where lower(speed) = '5mbps');
+
+q13 	select pack_id,speed,monthly_payment
+	from Packages
+	where monthly_payment < (select min(monthly_payment) from packages where lower(speed) = '5mbps');
+
+q14 	select first_name,monthly_discount,pack_id
+	from customers
+	where monthly_discount < (select avg(monthly_discount) from Customers)
+	and pack_id = (select pack_id from customers where lower(first_name)='kevin');
+

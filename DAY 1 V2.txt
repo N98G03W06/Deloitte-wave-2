@@ -1,0 +1,137 @@
+
+SIMPLE SELECT V2
+
+v2 q1   select * 
+   	from tblemployees; 
+
+v2 q2	False
+
+v2 q3 	select department_id,department_name,manager_id as MNG from tbldepartments;
+
+v2 q4 	True
+
+v2 q5 	false
+
+v2 q6 	select employee_id,first_name,last_name,phone_number,department_id from tblemployees; 
+
+v2 q7 	select first_name,last_name,hire_date,salary,1.2*salary as annual_sal from tblemployees;
+
+v2 q8 	select last_name||' '||first_name as full_name, phone_number||'-'||email as contact_details from tblemployees;
+
+v2 q9 	select distinct manager_id from tblemployees;
+
+v2 q10 	select job_id||' '||job_id as employee_and_title from tblemployees; 
+
+v2 q11 	select first_name as FN,last_name as LN,salary as SAL,hire_date||' '||'HD' as HD  from tblemployees; 
+
+v2 q12 	select distinct salary from tblemployees; 
+
+v2 q13 	select distinct job_id,department_id from tblemployees; 
+
+
+
+
+WHERE CLAUSE V2
+
+v2 q1 	select first_name,department_id from tblemployees where last_name='De Haan';
+
+v2 q2 	select * 
+	from tbldepartments
+	where lower(department_name)='sales';
+
+v2 q3 	select first_name,last_name,department_id,salary
+	from tblemployees
+	where salary>9700;
+
+v2 q4 	select *
+	from tblemployees
+	where hire_date<'01-jan-1992';
+
+v2 q5 	select employee_id,first_name,job_id,department_id
+	from tblemployees
+	where department_id in (20,60,80);
+
+v2 q6 	select employee_id,first_name,job_id,department_id
+	from tblemployees
+	where department_id NOT in (20,60,80);
+ 
+v2 q7 	select last_name,phone_number,salary,manager_id
+	from tblemployees
+	where manager_id in (100,102,103);
+
+v2 q8 	select first_name,salary
+	from tblemployees
+	where  first_name like '%e';
+
+v2 q9 	select last_name,department_id
+	from tblemployees
+	where  last_name like '_i%';
+
+v2 q10 	select *
+	from tblemployees
+	where  regexp_like (lower(last_name), '+[ljh]+')
+	order by salary DESC;
+
+v2 q11 	select first_name,hire_date,salary,department_id
+	from tblemployees
+	where  first_name not like '%a%'
+	order by department_id ASC;
+
+v2 q12 	select * 
+	from tblemployees
+	where department_id=null;
+
+v2 q13 	select first_name||','||last_name as Full_name, salary
+	from tblemployees
+	where salary not between 7000 and 15000
+	order  by first_name||','||last_name ASC;
+
+v2 q14 	select first_name||','||last_name as Full_name,phone_number||'-'||email as contacts, salary as sal
+	from tblemployees
+	where salary  between 5000 and 10000;
+
+v2 q15 	select *
+	from tblemployees
+	where salary  between 6000 and 8000
+	and commission_pct is not null
+	or
+	department_id not in (80,90,100)
+	and hire_date<'01-Jan-1990';
+
+v2 q16 	select last_name,job_id,hire_date
+	from tblemployees
+	where hire_date  between '12-DEC-1995' AND '17-Apr-1998';
+
+v2 q17 	select first_name||last_name,hire_date,commission_pct,phone_number,salary
+	from tblemployees
+	where salary>10000 or substr(phone_number,3,1)= '5'
+	order by first_name DESC;
+
+v2 q18	select last_name,salary
+	from tblemployees
+	where salary>12000;
+
+v2 q19 	USING IN
+	select last_name,department_id
+	from tblemployees
+	where department_id in (50,80);
+	
+	USING OR
+	select last_name,department_id
+	from tblemployees
+	where department_id = 50 OR department_id=80;
+
+v2 q20 	select first_name,salary
+	from tblemployees
+	where commission_pct is null;
+
+V2 Q21 	select first_name,salary,manager_id
+	from tblemployees
+	where manager_id is not null;
+
+
+
+
+	
+
+
