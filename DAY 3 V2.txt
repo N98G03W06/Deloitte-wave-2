@@ -1,0 +1,125 @@
+SQL JOIN METHODS V2
+
+q1 a)	select E.first_name,E.last_name,E.department_id,D.department_name
+	From tblemployees E
+	Join tblDepartments D
+	on E.department_id = d.department_id;
+
+   b) 	select E.first_name,E.last_name,E.department_id,D.department_name
+	From tblemployees E
+	Join tblDepartments D
+	on E.department_id = d.department_id and e.department_id in (50,90);
+
+q2 a) 	select D.department_name,L.city,L.state_province
+	From tblLocations L
+	Join tblDepartments D
+	on L.location_id= D.location_id;
+   b) 	select E.first_name||' '||E.last_name,D.department_name,L.city,L.state_province
+	From tblLocations L
+	Join tblDepartments D
+	on L.location_id= D.location_id
+	join tblEmployees E
+	on E.department_id= d.department_id;
+   c) 	select E.first_name||' '||E.last_name as full_name,D.department_name,L.city,L.state_province
+	From tblLocations L
+	Join tblDepartments D
+	on L.location_id= D.location_id
+	join tblEmployees E
+	on E.department_id= d.department_id where lower(E.last_name) like '%a%';
+
+q3 	select E.first_name, E.salary, J.Grade_name
+	from tblemployees E
+	join job_grades J
+	on E.salary between J.min_price and j.max_price;
+
+q4 a)	select E.first_name,E.last_name,D.department_id,D.department_name
+	from tblemployees E
+	left outer join tbldepartments D
+	on E.department_id=d.department_id;
+   b) 	select E.first_name,E.last_name,D.department_id,D.department_name
+	from tblemployees E
+	right outer join tbldepartments D
+	on E.department_id=d.department_id;
+
+q5 a)	select E.last_name as emp_last_name,e1.last_name as man_last_name
+	from tblemployees E
+	join tblemployees E1
+	on e.manager_id=e1.employee_id;
+	
+   b)	select E.last_name,e1.last_name
+	from tblemployees E
+	left outer join tblemployees E1
+	on e.manager_id=e1.employee_id;
+
+q6	select E.first_name,E.last_name,E.department_id 
+	from tblemployees E
+	join tblemployees E1
+	on E.department_id = E1.department_id and lower(e1.last_name)='king';
+
+q7 	select E.last_name,e.salary
+	from tblemployees E
+	join tblemployees E1
+	on e.salary<e1.salary and e1.employee_id=103;
+
+
+
+SQL SUB QUERIES
+
+q1 	select first_name,salary
+	from tblemployees 
+	where salary> (select salary from tblemployees where employee_id=103);
+
+q2 	select department_id,department_name
+	from tbldepartments 
+	where location_id= (select location_id from tbldepartments where department_id=90);
+
+q3 	select last_name,hire_date
+	from tblemployees 
+	where hire_date > (select hire_date from tblemployees where employee_id=101);
+
+
+q4 	select first_name,last_name,department_id
+	from tblemployees 
+	where department_id=(select department_id from tbldepartments where lower(department_name)='sales');
+
+
+
+q5 	select department_id,department_name 
+	from tbldepartments
+	where location_id = (select location_id from tbllocations where lower(city)= 'toronto');  
+
+
+q6 	select first_name,salary,department_id 
+	from tblemployees
+	where department_id = (select department_id from tblemployees where employee_id=124); 
+	
+q7 	select first_name,salary,department_id 
+	from tblemployees
+	where salary > (select avg(salary) from tblemployees); 
+
+q8 	select first_name,salary,department_id 
+	from tblemployees
+	where salary in (select salary from tblemployees where department_id =20); 
+
+q9 	select first_name,salary,department_id 
+	from tblemployees
+	where salary > (select max(salary) from tblemployees where department_id =50); 
+
+q10 	select first_name,salary,department_id 
+	from tblemployees
+	where salary > (select min(salary) from tblemployees where department_id =60); 
+
+q11 	select first_name,salary,department_id 
+	from tblemployees
+	where salary < (select min(salary) from tblemployees where department_id =90); 
+
+q12 	select e.first_name,e.salary,e.department_id 
+	from tblemployees e
+	join tbldepartments d
+	on e.department_id = d.department_id
+	where d.location_id = (select location_id from tbllocations where lower(city)='seattle'); 
+
+q13 	select first_name,salary,department_id 
+	from tblemployees 
+	where salary < (select avg(salary) from tblemployees )
+	and department_id = (select department_id from tblemployees where loweR(first_name)='kevin'); 
