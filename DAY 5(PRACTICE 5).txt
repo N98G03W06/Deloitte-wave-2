@@ -1,0 +1,54 @@
+PRACTICE 5
+
+1 	create table messeges(
+	results number(5)
+	);
+
+
+
+	SET SERVEROUTPUT ON;
+	declare 
+	V_num number(5):=0;
+
+	begin
+	LOOP
+	v_num:=v_num+1;
+	if (v_num <> 6 AND v_num<>8) THEN
+	insert into messeges values(v_num);
+	dbms_output.put_line(v_num);
+	END IF;
+	exit when v_num>9;
+	end LOOP;
+	COMMIT;
+	END;
+	select * from messeges;
+
+2 	Create table EMP
+	as (select * from tblemployees);
+
+	ALTER TABLE EMP
+	ADD stars varchar2(50);
+
+	Declare 
+	v_salary number(10);
+	v_asterik emp.stars%type:=null;
+	V_empno emp.employee_id%type := 198;
+	v_count number(10);
+	begin 
+
+	select ceil(salary/1000) into v_count  from emp where employee_id=v_empno;
+	LOOP
+	v_asterik:=v_asterik||'*';
+	v_count:=v_count-1;
+	exit when v_count=0;
+	end loop;
+	update emp
+	set stars=v_asterik
+	where employee_id=v_empno;
+	end;
+ 	select * from emp where employee_id=198;
+
+
+
+
+
