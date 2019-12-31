@@ -1,0 +1,124 @@
+SET 
+1 	select department_id 
+	from tbldepartments
+	MINUS
+	select department_id 
+	from tbldepartments 
+	where department_id in (select department_id from tblemployees 
+	where lower(job_id)='sh_clerk');
+
+2 	select country_id,country_name from tblcountries
+	minus
+	select C.country_id,C.country_name FROM tblcountries C join
+	tbllocations L
+	on C.country_id=L.country_id
+	inner join tbldepartments D
+	on D.location_id = l.location_id;
+
+3. 	select job_id from tblemployees
+	where department_id=10
+	union
+	select job_id from tblemployees
+	where department_id=50
+	union 
+	select job_id from tblemployees
+	where department_id=20;
+
+4 	SELECT E.JOB_ID,E.EMPLOYEE_ID FROM
+	EMPLOYEES E
+	intersect 
+	SELECT H.JOB_ID,H.EMPLOYEE_ID FROM
+
+
+5	SELECT LAST_NAME,DEPARTMENT_ID,TO_char('NULL')
+	FROM TBLEMPLOYEES 
+	UNION ALL
+	SELECT TO_char('NULL'),DEPARTMENT_ID,Department_name
+	FROM tbldepartments
+	
+
+
+DDL
+
+1 	CREATE TABLE DEPT(
+	ID NUMBER(7),
+	NAME VARCHAR2(25),
+	CONSTRAINT PK_ID PRIMARY KEY(ID)
+	);
+	ALTER TABLE DEPT READ ONLY;
+	INSERT INTO DEPT (select department_id,department_name from tbldepartments);--doesn't work
+	ALTER TABLE DEPT READ WRITE;
+	INSERT INTO DEPT (select department_id,department_name from tbldepartments);
+	
+
+2 	INSERT INTO DEPT (select department_id,department_name from tbldepartments);
+
+
+
+3	CREATE TABLE EMP(
+	ID NUMBER(7),
+	LAST_NAME VARCHAR2(25),
+	FIRST_NAME VARCHAR2(25),
+	DEPT_ID NUMBER (7),
+    	CONSTRAINT FK_ID FOREIGN KEY (DEPT_ID) REFERENCES DEPT(ID)
+	);
+
+4 	CREATE TABLE employees2 as
+	SELECT EMPLOYEE_ID AS ID,
+	FIRST_NAME AS FIRST_NAME,
+	LAST_NAME AS LAST_NAME,
+	SALARY AS SALARY,
+	DEPARTMENT_ID AS DEPT_ID
+	FROM TBLEMPLOYEES;
+
+5 	ALTER TABLE EMPLOYEES2 READ ONLY;
+
+6 	INSERT INTO EMPLOYEES2 (ID,FIRST_NAME,LAST_NAME,SALARY,DEPT_ID) VALUES (1,'','',25,25);
+	//GIVES ERROR
+
+7	ALTER TABLE EMPLOYEES2 READ WRITE; 
+
+8 	DROP TABLE EMPLOYEES2;
+
+CREATING OTHER SCHEMA OBJECTS
+PART 1
+
+1	CREATE VIEW EMPLOYEES_VU AS
+ 	SELECT EMPLOYEE_ID,LAST_NAME AS EMPLOYEE,DEPARTMENT_ID
+ 	FROM TBLEMPLOYEES; 
+ 	
+2 	SELECT * FROM EMPLOYEES_VU;
+
+3 	SELECT employee,department_id FROM EMPLOYEES_VU;
+
+4 	CREATE or replace VIEW dept_50 as
+ 	select employee_id as empno,last_name as employee,department_id as deptno
+ 	from tblemployees
+ 	where department_id=50
+	with check option;
+
+5	SELECT * FROM DEPT_50;
+
+6 	UPDATE DEPT_50
+	SET DEPTNO = 80 
+	WHERE LOWER(employee)='oconnell';
+
+PART 2
+
+1 	CREATE SEQUENCE DEPT_ID_SEQ
+	MINVALUE 200
+	MAXVALUE 1000
+	INCREMENT BY 10;
+
+2	insert into dept values (DEPT_ID_SEQ.NEXTVAL,'education');
+	insert into dept values (DEPT_ID_SEQ.NEXTVAL,'administration');	
+
+3 	create index ind_name on dept(name);
+
+4 	create synonym empP for employees;	
+
+
+
+
+
+
