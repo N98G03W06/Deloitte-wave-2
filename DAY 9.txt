@@ -1,0 +1,142 @@
+PRACTICE 6
+
+1 	declare 
+	v_country_id varchar2(5):='CA';
+	v_country_record tblcountries%rowtype;
+
+	begin
+	select * into v_country_record 
+	from tblcountries
+	where country_id=v_country_id;
+	dbms_output.put_line(v_country_record.country_id||' '||v_country_record.country_name||' '||v_country_record.)
+	end;
+	/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PRACTICE 7
+
+1 a 	CREATE TABLE top_salaries
+	(salary number(8,2));
+  
+  b 	declare 
+	v_num number(5):=0;
+	v_sal tblemployees.salary%Type;
+	cursor c_emp_cursor is
+	select salary from tblemployees order by salary DESC;
+
+  c 	begin
+	v_num:=&n;
+	open c_emp_cursor;
+	Loop
+
+   		fetch c_emp_cursor into v_sal;
+    		insert into top_salaries values(v_sal);
+    		exit when (NOT c_emp_cursor%FOUND OR c_emp_cursor%rowcount=v_num);
+
+	end loop;
+	close c_emp_cursor;
+	end;
+
+  d 	select * from top_salaries;
+
+  e 	rollback;
+
+
+2 	SET SERVEROUTPUT ON;
+	declare 
+	v_deptno number :=&deptno;
+	cursor c_emp_cursor is
+	select last_name,salary,manager_id
+	from tblemployees
+	where department_id=v_deptno;
+
+	begin
+	
+	for emp_row in c_emp_cursor
+        loop 
+        if(emp_row.salary<5000 and emp_row.manager_id=101 or emp_row.manager_id=124)
+        THEN
+        dbms_output.put_line(emp_row.last_name||' '||'due for a raise');
+        else 
+        dbms_output.put_line(emp_row.last_name||' '||'not due for a raise');
+        end if;
+        end loop;     
+   	
+	end;
+	/
+
+3 	SET SERVEROUTPUT ON;
+
+	DECLARE
+    	CURSOR dept_cursor IS
+    	SELECT
+       		department_id,
+        	department_name
+    	FROM
+        	tbldepartments
+    	WHERE
+        	department_id < 100
+    	ORDER BY
+        	department_id;
+
+    	CURSOR emp_cursor (
+        	dept_no NUMBER
+   	 ) IS
+    	SELECT
+        last_name,
+        job_id,
+        hire_date,
+        salary
+    	FROM
+        tblemployees
+    	WHERE
+        employee_id < 120
+        AND department_id = dept_no;
+
+    	v1   dept_cursor%rowtype;
+    	v2   emp_cursor%rowtype;
+	BEGIN
+    	OPEN dept_cursor;
+    	LOOP
+        FETCH dept_cursor INTO v1;
+        dbms_output.put_line(v1.department_id
+                             || ' '
+                             || v1.department_name);
+        OPEN emp_cursor(v1.department_id);
+        LOOP
+            FETCH emp_cursor INTO v2;
+            dbms_output.put_line(v2.last_name
+                                 || ' '
+                                 || v2.job_id
+                                 || ' '
+                                 || v2.hire_date
+                                 || ' '
+                                 || v2.salary);
+
+            	EXIT WHEN emp_cursor%notfound;
+        	END LOOP;
+
+        	CLOSE emp_cursor;
+        	EXIT WHEN dept_cursor%notfound;
+    		END LOOP;
+
+   	 CLOSE dept_cursor;
+	END;
+
+
+
+ 
