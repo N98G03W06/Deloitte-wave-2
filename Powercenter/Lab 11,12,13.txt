@@ -1,0 +1,224 @@
+
+------------------------------------------------------------------------------
+01/09/2020 07:01:43 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Shortcut to source OPERATIONAL_DATA_STORE:Shortcut_to_ODS_TRANS_REVENUE inserted.
+Shortcut to source SALES_TRANSACTIONS:Shortcut_to_EMPLOYEES inserted.
+Shortcut to source OPERATIONAL_DATA_STORE:Shortcut_to_ODS_DEALER_SALES inserted.
+Shortcut to source OPERATIONAL_DATA_STORE:Shortcut_to_ODS_DAILY_SALES_DATES inserted.
+Shortcut to target Shortcut_to_DIM_EMPLOYEES inserted.
+Shortcut to target Shortcut_to_DIM_TIME inserted.
+Shortcut to target Shortcut_to_DIM_PRODUCTS inserted.
+Shortcut to target Shortcut_to_DIM_DEALERSHIP inserted.
+Shortcut to target Shortcut_to_DIM_CUSTOMERS inserted.
+Validating transformations of mapping M_LOAD_DIMENSIONS...
+...transformation validation completed with no errors.
+Validating data flow of mapping M_LOAD_DIMENSIONS...
+...Transformation EXP_VERIFY_DICOUNT has no output links.
+...there are data flow validation errors.
+Parsing mapping M_LOAD_DIMENSIONS...
+...parsing completed with no errors.
+WARNING: Lookup transformation LKP_GET_DISCOUNT Condition field PROMO_ID_EXP is unconnected.
+
+******** Mapping M_LOAD_DIMENSIONS is INVALID ********
+mapping  M_LOAD_DIMENSIONS inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/09/2020 07:03:04 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Validating transformations of mapping M_LOAD_DIMENSIONS...
+...transformation validation completed with no errors.
+Validating data flow of mapping M_LOAD_DIMENSIONS...
+...Transformation EXP_VERIFY_DICOUNT has no output links.
+...there are data flow validation errors.
+Parsing mapping M_LOAD_DIMENSIONS...
+...parsing completed with no errors.
+WARNING: Lookup transformation LKP_GET_DISCOUNT Condition field PROMO_ID_EXP is unconnected.
+
+******** Mapping M_LOAD_DIMENSIONS is INVALID ********
+mapping  M_LOAD_DIMENSIONS updated.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/09/2020 07:08:33 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Validating transformations of mapping M_LOAD_DIMENSIONS...
+...transformation validation completed with no errors.
+Validating data flow of mapping M_LOAD_DIMENSIONS...
+...Transformation EXP_VERIFY_DICOUNT has no output links.
+...there are data flow validation errors.
+Parsing mapping M_LOAD_DIMENSIONS...
+...parsing completed with no errors.
+WARNING: Lookup transformation LKP_GET_DISCOUNT Condition field PROMO_ID_EXP is unconnected.
+
+******** Mapping M_LOAD_DIMENSIONS is INVALID ********
+mapping  M_LOAD_DIMENSIONS updated.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/09/2020 07:15:31 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Validating transformations of mapping M_LOAD_DIMENSIONS...
+...transformation validation completed with no errors.
+Validating data flow of mapping M_LOAD_DIMENSIONS...
+...data flow validation completed with no errors.
+Parsing mapping M_LOAD_DIMENSIONS...
+...parsing completed with no errors.
+WARNING: Lookup transformation LKP_GET_DISCOUNT Condition field PROMO_ID_EXP is unconnected.
+
+******** Mapping M_LOAD_DIMENSIONS is VALID ********
+mapping  M_LOAD_DIMENSIONS updated.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 03:18:26 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Shortcut to source SALES_TRANSACTIONS:Shortcut_to_CURRENT_EMPLOYEES inserted.
+Validating transformations of mapping m_UPDATE_EMPLOYEES...
+...transformation validation completed with no errors.
+Validating data flow of mapping m_UPDATE_EMPLOYEES...
+...data flow validation completed with no errors.
+Parsing mapping m_UPDATE_EMPLOYEES...
+...parsing completed with no errors.
+
+******** Mapping m_UPDATE_EMPLOYEES is VALID ********
+mapping  m_UPDATE_EMPLOYEES inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 03:53:56 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Shortcut to source SALES_TRANSACTIONS:Shortcut_to_TRANSACTIONS inserted.
+Shortcut to target Shortcut_to_FACTS_ATOMIC inserted.
+Validating transformations of mapping m_LOAD_FACTS...
+...transformation validation completed with no errors.
+Validating data flow of mapping m_LOAD_FACTS...
+...data flow validation completed with no errors.
+Parsing mapping m_LOAD_FACTS...
+...parsing completed with no errors.
+
+******** Mapping m_LOAD_FACTS is VALID ********
+mapping  m_LOAD_FACTS inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 04:15:51 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Shortcut to source ENTERPRISE_DATA_WAREHOUSE:Shortcut_to_FACTS_ATOMIC inserted.
+Validating transformations of mapplet mpy_FACT_SUMMARIES...
+...transformation validation completed with no errors.
+Validating data flow of mapplet mpy_FACT_SUMMARIES...
+...data flow validation completed with no errors.
+Parsing mapplet mpy_FACT_SUMMARIES...
+Transformation: agg_SUM_BY_PRODUCT_DEALERSHIP Field: SUM_TRANS_REVENUE
+<<PM Parse Error>> [SUM_TRANS_REVENUE]: invalid symbol reference
+... >>>>SUM_TRANS_REVENUE<<<<
+Transformation: agg_SUM_BY_PRODUCT_MONTH Field: SUM_TRANS_REVENUE
+<<PM Parse Error>> [SUM_TRANS_REVENUE]: invalid symbol reference
+... >>>>SUM_TRANS_REVENUE<<<<
+Transformation: agg_SUM_BY_PRODUCT_DATE Field: SUM_TRANS_REVENUE
+<<PM Parse Error>> [SUM_TRANS_REVENUE]: invalid symbol reference
+... >>>>SUM_TRANS_REVENUE<<<<
+...there are parsing errors.
+
+******** Mapplet mpy_FACT_SUMMARIES is INVALID ********
+mapplet mpy_FACT_SUMMARIES inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 04:27:44 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Validating transformations of mapplet mpy_FACT_SUMMARIES...
+...transformation validation completed with no errors.
+Validating data flow of mapplet mpy_FACT_SUMMARIES...
+...data flow validation completed with no errors.
+Parsing mapplet mpy_FACT_SUMMARIES...
+...parsing completed with no errors.
+
+******** Mapplet mpy_FACT_SUMMARIES is VALID ********
+mapplet mpy_FACT_SUMMARIES updated.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 05:04:27 ** Saving... Repository EDW_DEV, Folder LOAD_EDW
+------------------------------------------------------------------------------
+Shortcut to target Shortcut_to_SUM_PRODUCT_MONTH inserted.
+Shortcut to target Shortcut_to_SUM_PRODUCT_DEALERSHIP inserted.
+Shortcut to target Shortcut_to_SUM_PRODUCT_DATE inserted.
+Validating transformations of mapping m_LOAD_FACTS...
+...transformation validation completed with no errors.
+Validating data flow of mapping m_LOAD_FACTS...
+...data flow validation completed with no errors.
+Parsing mapping m_LOAD_FACTS...
+...parsing completed with no errors.
+WARNING: Lookup transformation LKP_PRODUCT_ATTRIBUTES21 Condition field PRODUCT_ID_AGG is unconnected.
+
+******** Mapping m_LOAD_FACTS is VALID ********
+mapping  m_LOAD_FACTS updated.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 07:17:09 ** Saving... Repository EDW_DEV, Folder LOAD_ODS
+------------------------------------------------------------------------------
+Shortcut to target Shortcut_to_FACTS_ATOMIC inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 07:29:04 ** Saving... Repository EDW_DEV, Folder DELOITTE
+------------------------------------------------------------------------------
+source Scott:EMP inserted.
+source Scott:SALGRADE inserted.
+source Scott:DEPT inserted.
+source Scott:BONUS inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 07:33:23 ** Saving... Repository EDW_DEV, Folder DELOITTE
+------------------------------------------------------------------------------
+Target EMP_TARGET inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 08:04:44 ** Saving... Repository EDW_DEV, Folder DELOITTE
+------------------------------------------------------------------------------
+Target EMP_TARGET updated.
+Validating transformations of mapping mp_emp_emp_target...
+Lookup Transformation LKPTRANS has empty condition.  Transformation is not valid.
+...there are invalid transformations.
+Validating data flow of mapping mp_emp_emp_target...
+...data flow validation completed with no errors.
+Parsing mapping mp_emp_emp_target...
+...parsing completed with no errors.
+
+******** Mapping mp_emp_emp_target is INVALID ********
+mapping  mp_emp_emp_target inserted.
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+01/10/2020 08:05:37 ** Saving... Repository EDW_DEV, Folder DELOITTE
+------------------------------------------------------------------------------
+Validating transformations of mapping mp_emp_emp_target...
+...transformation validation completed with no errors.
+Validating data flow of mapping mp_emp_emp_target...
+...data flow validation completed with no errors.
+Parsing mapping mp_emp_emp_target...
+...parsing completed with no errors.
+
+******** Mapping mp_emp_emp_target is VALID ********
+mapping  mp_emp_emp_target updated.
+------------------------------------------------------------------------------
+
